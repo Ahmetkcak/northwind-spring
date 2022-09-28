@@ -34,4 +34,5 @@ public interface ProductService {
 	
 	DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails();
 	
+	Product getById(int id);
 }

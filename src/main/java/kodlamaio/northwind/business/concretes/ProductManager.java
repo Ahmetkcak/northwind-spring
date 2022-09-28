@@ -1,7 +1,9 @@
 package kodlamaio.northwind.business.concretes;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -90,5 +92,10 @@ public class ProductManager implements ProductService{
 	@Override
 	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
 		return new SuccessDataResult<List<ProductWithCategoryDto>>(this.productDao.getProductWithCategoryDetails(),"Data listelendi");
+	}
+
+	@Override
+	public Product getById(int id) {
+		return productDao.findById(id).orElseThrow(() -> new NoSuchElementException("Bu id'de bir ürün bulunamadı"));
 	}
 }
